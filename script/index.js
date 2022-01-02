@@ -83,5 +83,3 @@ const renderGoods = (goods) => {
     tbody.innerHTML = str;
 };
 renderGoods(goods);
-
-
