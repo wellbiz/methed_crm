@@ -58,7 +58,7 @@ const goods = [
 const createRow = (item) => {
     return `<tr>
  <td class="table__cell ">${item.id}</td>
- <td class="table__cell table__cell_left" data-id="24601654816512">${
+ <td class="table__cell table__cell_left" data-id="${item.id}">${
      item.title
  }</td>
  <td class="table__cell table__cell_left">${item.category}</td>
