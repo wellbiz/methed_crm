@@ -55,12 +55,12 @@ const goods = [
         },
     },
 ];
-const createRow = (item) => {
+const createRow = (item, currentNumber) => {
     return `<tr>
- <td class="table__cell ">${item.id}</td>
+ <td class="table__cell ">${currentNumber}</td>
  <td class="table__cell table__cell_left" data-id="${item.id}">${
-     item.title
- }</td>
+        item.title
+    }</td>
  <td class="table__cell table__cell_left">${item.category}</td>
  <td class="table__cell">шт</td>
  <td class="table__cell">${item.count}</td>
@@ -75,11 +75,17 @@ const createRow = (item) => {
 };
 const renderGoods = (goods) => {
     let str = '';
+    const  startNumber = +document.querySelector(
+        '.goods__table tbody tr:last-child td:first-child'
+    ).textContent;
+    let currentNumber = 0;
+    currentNumber =
+        currentNumber > startNumber ? currentNumber : startNumber;
     goods.forEach((el) => {
-        str += createRow(el);
+        str += createRow(el, ++currentNumber);
     });
 
     const tbody = document.querySelector('.table__body');
-    tbody.innerHTML = str;
+    tbody.innerHTML += str;
 };
 renderGoods(goods);
