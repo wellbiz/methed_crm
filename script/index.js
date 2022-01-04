@@ -55,7 +55,7 @@ const goods = [
     },
   },
 ];
-const createRow = (item, currentNumber) => {
+const createRow = (item,currentNumber) => {
   return ` <tr><td class="table__cell">${currentNumber}</td>
 <td class="table__cell table__cell_left table__cell_name" data-id="${item.id}">
   <span class="table__cell-id">id: ${item.id}</span>
@@ -72,18 +72,17 @@ const createRow = (item, currentNumber) => {
 </td>
 </tr>`;
 };
+
+
 const renderGoods = (goods) => {
-  let str = "";
-  const startNumber = +document.querySelector(
-    ".goods__table tbody tr:last-child td:first-child"
-  ).textContent;
+  const tbody = document.querySelector(".table__body");
+
   let currentNumber = 0;
-  currentNumber = currentNumber > startNumber ? currentNumber : startNumber;
+  
   goods.forEach((el) => {
-    str += createRow(el, ++currentNumber);
+    tbody.insertAdjacentHTML('beforeend',createRow(el, ++currentNumber));
   });
 
-  const tbody = document.querySelector(".table__body");
-  tbody.innerHTML += str;
+ 
 };
 renderGoods(goods);
