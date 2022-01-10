@@ -11,6 +11,31 @@ const removeActiveOverlay = () => {
 
 removeActiveOverlay();
 
+const openModalWindow = () => {
+  const buttonAddGoods = document.querySelector(".panel__add-goods");
+  buttonAddGoods.addEventListener("click", () => {
+    document.querySelector(".overlay").classList.add("active");
+  });
+};
+
+openModalWindow();
+
+const closeModalWindow = () => {
+  const buttonClose = document.querySelector(".modal__close");
+  buttonClose.addEventListener("click", () => {
+    removeActiveOverlay();
+  });
+
+  const overlay = document.querySelector(".overlay");
+  overlay.addEventListener("click", (e) => {
+    removeActiveOverlay();
+  });
+
+  document.querySelector(".modal").addEventListener("click", (e) => {
+    e.stopImmediatePropagation();
+  });
+};
+closeModalWindow();
 const goods = [
   {
     id: 1,
