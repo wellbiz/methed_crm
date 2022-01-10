@@ -73,7 +73,6 @@ const createRow = (item,currentNumber) => {
 </tr>`;
 };
 
-
 const renderGoods = (goods) => {
   const tbody = document.querySelector(".table__body");
 
@@ -82,7 +81,5 @@ const renderGoods = (goods) => {
   goods.forEach((el) => {
     tbody.insertAdjacentHTML('beforeend',createRow(el, ++currentNumber));
   });
-
- 
 };
 renderGoods(goods);
