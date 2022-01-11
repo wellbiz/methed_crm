@@ -1,41 +1,5 @@
 "use strict";
 
-const modalTitle = document.querySelector(".modal__title");
-const modalForm = document.querySelector(".modal__form");
-const modalCheckbox = document.querySelector(".modal__checkbox");
-const modalDiscount = document.querySelector(".modal__input_discount");
-
-const removeActiveOverlay = () => {
-  document.querySelector(".overlay").classList.remove("active");
-};
-
-removeActiveOverlay();
-
-const openModalWindow = () => {
-  const buttonAddGoods = document.querySelector(".panel__add-goods");
-  buttonAddGoods.addEventListener("click", () => {
-    document.querySelector(".overlay").classList.add("active");
-  });
-};
-
-openModalWindow();
-
-const closeModalWindow = () => {
-  const buttonClose = document.querySelector(".modal__close");
-  buttonClose.addEventListener("click", () => {
-    removeActiveOverlay();
-  });
-
-  const overlay = document.querySelector(".overlay");
-  overlay.addEventListener("click", (e) => {
-    removeActiveOverlay();
-  });
-
-  document.querySelector(".modal").addEventListener("click", (e) => {
-    e.stopImmediatePropagation();
-  });
-};
-closeModalWindow();
 const goods = [
   {
     id: 1,
@@ -80,6 +44,44 @@ const goods = [
     },
   },
 ];
+
+const modalTitle = document.querySelector(".modal__title");
+const modalForm = document.querySelector(".modal__form");
+const modalCheckbox = document.querySelector(".modal__checkbox");
+const modalDiscount = document.querySelector(".modal__input_discount");
+
+const removeActiveOverlay = () => {
+  document.querySelector(".overlay").classList.remove("active");
+};
+
+removeActiveOverlay();
+
+const openModalWindow = () => {
+  const buttonAddGoods = document.querySelector(".panel__add-goods");
+  buttonAddGoods.addEventListener("click", () => {
+    document.querySelector(".overlay").classList.add("active");
+  });
+};
+
+openModalWindow();
+
+const closeModalWindow = () => {
+  const buttonClose = document.querySelector(".modal__close");
+  buttonClose.addEventListener("click", () => {
+    removeActiveOverlay();
+  });
+
+  const overlay = document.querySelector(".overlay");
+  overlay.addEventListener("click", () => {
+    removeActiveOverlay();
+  });
+
+  document.querySelector(".modal").addEventListener("click", (e) => {
+    e.stopImmediatePropagation();
+  });
+};
+closeModalWindow();
+
 const createRow = (item, currentNumber) => {
   return ` <tr><td class="table__cell">${currentNumber}</td>
 <td class="table__cell table__cell_left table__cell_name" data-id="${item.id}">
