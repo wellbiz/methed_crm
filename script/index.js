@@ -1,6 +1,6 @@
 "use strict";
 
-const goods = [
+let goods = [
   {
     id: 1,
     title: "Смартфон Xiaomi 11T 8/128GB",
@@ -72,14 +72,11 @@ const closeModalWindow = () => {
   });
 
   const overlay = document.querySelector(".overlay");
-  overlay.addEventListener("click", () => {
-    removeActiveOverlay();
-  });
-
-  document.querySelector(".modal").addEventListener("click", (e) => {
-    e.stopImmediatePropagation();
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) removeActiveOverlay();
   });
 };
+
 closeModalWindow();
 
 const createRow = (item, currentNumber) => {
@@ -110,3 +107,29 @@ const renderGoods = (goods) => {
   });
 };
 renderGoods(goods);
+
+const removeChoisedTr = () => {
+  const tbody = document.querySelector(".table__body");
+  tbody.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.classList.contains("table__btn_del")) {
+      const currentTr = target.closest('tr');
+      const dataId = currentTr.querySelector("td:nth-child(2)").dataset.id;
+      currentTr.remove();
+      goods.forEach((el, i) => {
+        if (el.id == dataId) {
+          goods.splice(i, 1);
+
+          console.log(goods);
+        }
+      });
+
+    }
+  });
+};
+
+removeChoisedTr();
+
+/*
+удалить tr при нажатии кнопки и заняться следующим
+*/
