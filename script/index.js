@@ -113,7 +113,7 @@ const removeChoisedTr = () => {
   tbody.addEventListener("click", (e) => {
     const target = e.target;
     if (target.classList.contains("table__btn_del")) {
-      const currentTr = target.closest('tr');
+      const currentTr = target.closest("tr");
       const dataId = currentTr.querySelector("td:nth-child(2)").dataset.id;
       currentTr.remove();
       goods.forEach((el, i) => {
@@ -123,7 +123,6 @@ const removeChoisedTr = () => {
           console.log(goods);
         }
       });
-
     }
   });
 };
