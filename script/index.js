@@ -5,6 +5,7 @@ let goods = [
     id: 1,
     title: "Смартфон Xiaomi 11T 8/128GB",
     price: 27000,
+    units: "шт",
     description:
       "Смартфон Xiaomi 11T – это представитель флагманской линейки, выпущенной во второй половине 2021 года. И он полностью соответствует такому позиционированию, предоставляя своим обладателям возможность пользоваться отличными камерами, ни в чем себя не ограничивать при запуске игр и других требовательных приложений.",
     category: "mobile-phone",
@@ -19,6 +20,7 @@ let goods = [
     id: 2,
     title: "Радиоуправляемый автомобиль Cheetan",
     price: 4000,
+    units: "шт",
     description:
       "Внедорожник на дистанционном управлении. Скорость 25км/ч. Возраст 7 - 14 лет",
     category: "toys",
@@ -33,6 +35,7 @@ let goods = [
     id: 3,
     title: "ТВ приставка MECOOL KI",
     price: 12400,
+    units: "шт",
     description:
       "Всего лишь один шаг сделает ваш телевизор умным, Быстрый и умный MECOOL KI PRO, прекрасно спроектированный, сочетает в себе прочный процессор Cortex-A53 с чипом Amlogic S905D",
     category: "tv-box",
@@ -86,7 +89,7 @@ const createRow = (item, currentNumber) => {
   <span class="table__cell-id">id: ${item.id}</span>
   ${item.title}</td>
 <td class="table__cell table__cell_left">${item.category}</td>
-<td class="table__cell">шт</td>
+<td class="table__cell">${item.units}</td>
 <td class="table__cell">${item.count}</td>
 <td class="table__cell">$${item.price.toLocaleString()}</td>
 <td class="table__cell">$${(item.price * item.count).toLocaleString()}</td>
@@ -174,8 +177,10 @@ const computeTotalPriceModal = (f) => {
   const price = f.price;
   const count = f.count;
   const outTotal = () => {
-    if (parseFloat(price.value) && +count.value)
-      totalPrice.value = `$ ${(price.value * count.value).toLocaleString()}`;
+    if (parseFloat(price.value.replace(",", ".")) && +count.value)
+      totalPrice.value = `$ ${(
+        parseFloat(f.price.value.replace(",", ".")) * count.value
+      ).toLocaleString()}`;
   };
   price.addEventListener("blur", outTotal);
   count.addEventListener("blur", outTotal);
@@ -187,11 +192,12 @@ const addItemToTable = (f) => {
     const item = {
       id: +document.querySelector(".vendor-code__id").textContent,
       title: f.name.value,
-      price: +f.price.value,
+      price: parseFloat(f.price.value.replace(",", ".")),
       description: f.description.value,
       category: f.category.value,
       discont: +f.discount_count.value,
       count: +f.count.value,
+      units: f.units.value,
       images: {
         small: f.image.value,
         big: "",
@@ -207,11 +213,10 @@ const addItemToTable = (f) => {
     document
       .querySelector(".table tbody")
       .insertAdjacentHTML("beforeend", createRow(item, ++number));
-      computeTotalPricePage(goods);
+    computeTotalPricePage(goods);
   });
   computeTotalPricePage(goods);
   computeTotalPriceModal(f);
-
 };
 
 addItemToTable(form);
