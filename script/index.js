@@ -60,6 +60,7 @@ const openModalWindow = () => {
   const buttonAddGoods = document.querySelector(".panel__add-goods");
   buttonAddGoods.addEventListener("click", () => {
     document.querySelector(".overlay").classList.add("active");
+    setVendorCodeId(goods);
   });
 };
 
@@ -87,8 +88,8 @@ const createRow = (item, currentNumber) => {
 <td class="table__cell table__cell_left">${item.category}</td>
 <td class="table__cell">шт</td>
 <td class="table__cell">${item.count}</td>
-<td class="table__cell">$${item.price}</td>
-<td class="table__cell">$${item.price * item.count}</td>
+<td class="table__cell">$${item.price.toLocaleString()}</td>
+<td class="table__cell">$${(item.price * item.count).toLocaleString()}</td>
 <td class="table__cell table__cell_btn-wrapper">
   <button class="table__btn table__btn_pic"></button>
   <button class="table__btn table__btn_edit"></button>
@@ -122,6 +123,7 @@ const removeChoisedTr = () => {
 
           console.log(goods);
         }
+        computeTotalPricePage(goods);
       });
     }
   });
@@ -129,6 +131,88 @@ const removeChoisedTr = () => {
 
 removeChoisedTr();
 
-/*
-удалить tr при нажатии кнопки и заняться следующим
-*/
+const form = document.querySelector(".modal__form");
+
+const enableInputDiscount = (f) => {
+  const input = f.discount_count;
+  if (input.disabled == true) {
+    input.disabled = false;
+    input.required = true;
+  }
+};
+
+const disableInputDiscount = (f) => {
+  const input = f.discount_count;
+  if (input.disabled == false) {
+    input.disabled = true;
+    input.required = false;
+    input.value = "";
+  }
+};
+const setVendorCodeId = (goods) => {
+  const spanId = document.querySelector(".vendor-code__id");
+  spanId.textContent = goods[goods.length - 1].id + 1;
+};
+
+const editDiscount = () => {
+  discount.addEventListener("click", () => {
+    discount.checked ? enableInputDiscount(form) : disableInputDiscount(form);
+  });
+};
+
+editDiscount();
+const computeTotalPricePage = (goods) => {
+  const spanTotalPrice = document.querySelector(".crm__total-price");
+  let totalPrice = 0;
+  goods.forEach((item) => (totalPrice += item.count * item.price));
+
+  spanTotalPrice.textContent = `$ ${totalPrice.toLocaleString()}`;
+};
+
+const computeTotalPriceModal = (f) => {
+  const totalPrice = f.total;
+  const price = f.price;
+  const count = f.count;
+  const outTotal = () => {
+    if (parseFloat(price.value) && +count.value)
+      totalPrice.value = `$ ${(price.value * count.value).toLocaleString()}`;
+  };
+  price.addEventListener("blur", outTotal);
+  count.addEventListener("blur", outTotal);
+};
+
+const addItemToTable = (f) => {
+  f.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const item = {
+      id: +document.querySelector(".vendor-code__id").textContent,
+      title: f.name.value,
+      price: +f.price.value,
+      description: f.description.value,
+      category: f.category.value,
+      discont: +f.discount_count.value,
+      count: +f.count.value,
+      images: {
+        small: f.image.value,
+        big: "",
+      },
+    };
+    console.log("before push", goods);
+    goods.push(item);
+    console.log("after push", goods);
+    let number = +document.querySelector(
+      ".table tbody tr:last-child td:first-child"
+    ).textContent;
+
+    document
+      .querySelector(".table tbody")
+      .insertAdjacentHTML("beforeend", createRow(item, ++number));
+      computeTotalPricePage(goods);
+  });
+  computeTotalPricePage(goods);
+  computeTotalPriceModal(f);
+
+};
+
+addItemToTable(form);
+/* добавить в базу литры шт и т д */
