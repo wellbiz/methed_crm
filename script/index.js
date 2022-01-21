@@ -64,6 +64,7 @@ const openModalWindow = () => {
   buttonAddGoods.addEventListener("click", () => {
     document.querySelector(".overlay").classList.add("active");
     setVendorCodeId(goods);
+    modalForm.reset();
   });
 };
 
