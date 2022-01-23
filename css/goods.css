@@ -7,3 +7,12 @@
 .goods__table-wrapper {
   overflow-x: auto;
 }
+
+.row_id{
+	
+}
+.row_id::before{
+counter-increment: row_id;
+content: counter(row_id);
+text-align:center;
+}

@@ -85,7 +85,7 @@ const closeModalWindow = () => {
 closeModalWindow();
 
 const createRow = (item, currentNumber) => {
-  return ` <tr><td class="table__cell">${currentNumber}</td>
+  return ` <tr><td class="table__cell row_id"></td>
 <td class="table__cell table__cell_left table__cell_name" data-id="${item.id}">
   <span class="table__cell-id">id: ${item.id}</span>
   ${item.title}</td>
@@ -221,4 +221,6 @@ const addItemToTable = (f) => {
 };
 
 addItemToTable(form);
-/* добавить в базу литры шт и т д */
+/* TODO: при нуле исправить добавление товара
+сделать перерасчет порядкового номера товара
+*/
