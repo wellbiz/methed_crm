@@ -105,10 +105,8 @@ const createRow = (item, currentNumber) => {
 const renderGoods = (goods) => {
   const tbody = document.querySelector(".table__body");
 
-  let currentNumber = 0;
-
   goods.forEach((el) => {
-    tbody.insertAdjacentHTML("beforeend", createRow(el, ++currentNumber));
+    tbody.insertAdjacentHTML("beforeend", createRow(el));
   });
 };
 renderGoods(goods);
@@ -124,8 +122,6 @@ const removeChoisedTr = () => {
       goods.forEach((el, i) => {
         if (el.id == dataId) {
           goods.splice(i, 1);
-
-          console.log(goods);
         }
         computeTotalPricePage(goods);
       });
@@ -155,7 +151,7 @@ const disableInputDiscount = (f) => {
 };
 const setVendorCodeId = (goods) => {
   const spanId = document.querySelector(".vendor-code__id");
-  spanId.textContent = goods[goods.length - 1].id + 1;
+  spanId.textContent = "id" in goods ? goods.at(-1).id + 1 : "1";
 };
 
 const editDiscount = () => {
@@ -204,16 +200,11 @@ const addItemToTable = (f) => {
         big: "",
       },
     };
-    console.log("before push", goods);
     goods.push(item);
-    console.log("after push", goods);
-    let number = +document.querySelector(
-      ".table tbody tr:last-child td:first-child"
-    ).textContent;
 
     document
       .querySelector(".table tbody")
-      .insertAdjacentHTML("beforeend", createRow(item, ++number));
+      .insertAdjacentHTML("beforeend", createRow(item));
     computeTotalPricePage(goods);
   });
   computeTotalPricePage(goods);
@@ -221,6 +212,3 @@ const addItemToTable = (f) => {
 };
 
 addItemToTable(form);
-/* TODO: при нуле исправить добавление товара
-сделать перерасчет порядкового номера товара
-*/
