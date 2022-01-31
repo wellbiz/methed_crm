@@ -20,6 +20,9 @@ export const createRow = (item) => {
 </tr>`;
 };
 export const viewImgNewWindow = () => {
+  /*
+TODO: implementate eventListener by delegate method
+  */
   const button = document.querySelectorAll(".table__btn_pic");
   button.forEach((el) => {
     el.addEventListener("click", () => {
