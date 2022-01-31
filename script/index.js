@@ -1,7 +1,11 @@
 "use strict";
 
 import { goods } from "./module/goods.js";
-import { addItemToTable, editDiscount } from "./module/addGoods.js";
+import {
+  addItemToTable,
+  editDiscount,
+  viewImgNewWindow,
+} from "./module/addGoods.js";
 import {
   renderGoods,
   closeModalWindow,
@@ -14,6 +18,7 @@ const init = () => {
   openModalWindow();
   closeModalWindow();
   renderGoods(goods);
+  viewImgNewWindow();
   removeChoisedTr();
   editDiscount();
   addItemToTable(form);

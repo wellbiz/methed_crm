@@ -13,13 +13,32 @@ export const createRow = (item) => {
 <td class="table__cell">$${item.price.toLocaleString()}</td>
 <td class="table__cell">$${(item.price * item.count).toLocaleString()}</td>
 <td class="table__cell table__cell_btn-wrapper">
-  <button class="table__btn table__btn_pic"></button>
+  <button class="table__btn table__btn_pic" data-pic="./img/pic.jpg"></button>
   <button class="table__btn table__btn_edit"></button>
   <button class="table__btn table__btn_del"></button>
 </td>
 </tr>`;
 };
-
+export const viewImgNewWindow = () => {
+  const button = document.querySelectorAll(".table__btn_pic");
+  button.forEach((el) => {
+    el.addEventListener("click", () => {
+      const offsetTop = (screen.height - 800) / 2;
+      const offsetLeft = (screen.width - 600) / 2;
+      const win = open(
+        el.dataset.pic,
+        "picture",
+        `width=600,height=800,top=${offsetTop},left=${offsetLeft}`
+      );
+      const img = document.createElement("img");
+      img.src = el.dataset.pic;
+      img.width = "600";
+      img.height = "800";
+      img.alt = "рисунок товара";
+      win.document.body.append(img);
+    });
+  });
+};
 export const addItemToTable = (f) => {
   f.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -64,7 +83,6 @@ const disableInputDiscount = (f) => {
     input.value = "";
   }
 };
-
 
 export const editDiscount = () => {
   discount.addEventListener("click", () => {
