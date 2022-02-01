@@ -10,8 +10,9 @@ export const createRow = (item) => {
 <td class="table__cell table__cell_left">${item.category}</td>
 <td class="table__cell">${item.units}</td>
 <td class="table__cell">${item.count}</td>
-<td class="table__cell">$${item.price.toLocaleString()}</td>
-<td class="table__cell">$${(item.price * item.count).toLocaleString()}</td>
+<td class="table__cell">${new Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(item.price)}</td>
+<td class="table__cell">${new Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(item.price * item.count)}</td>
+
 <td class="table__cell table__cell_btn-wrapper">
   <button class="table__btn table__btn_pic" data-pic="./img/pic.jpg"></button>
   <button class="table__btn table__btn_edit"></button>
