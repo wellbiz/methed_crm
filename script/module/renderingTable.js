@@ -9,7 +9,7 @@ export const renderGoods = (goods) => {
 
 const setVendorCodeId = (goods) => {
   const spanId = document.querySelector(".vendor-code__id");
-  spanId.textContent = goods[0] ? goods[goods.length - 1].id + 1 : "1";
+  spanId.textContent = goods[0] ? goods.at(-1).id + 1 : "1";
 };
 
 export const closeModalWindow = () => {

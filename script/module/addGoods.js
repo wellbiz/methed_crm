@@ -10,8 +10,14 @@ export const createRow = (item) => {
 <td class="table__cell table__cell_left">${item.category}</td>
 <td class="table__cell">${item.units}</td>
 <td class="table__cell">${item.count}</td>
-<td class="table__cell">${new Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(item.price)}</td>
-<td class="table__cell">${new Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(item.price * item.count)}</td>
+<td class="table__cell">${new Intl.NumberFormat("ru", {
+    style: "currency",
+    currency: "RUB",
+  }).format(item.price)}</td>
+<td class="table__cell">${new Intl.NumberFormat("ru", {
+    style: "currency",
+    currency: "RUB",
+  }).format(item.price * item.count)}</td>
 
 <td class="table__cell table__cell_btn-wrapper">
   <button class="table__btn table__btn_pic" data-pic="./img/pic.jpg"></button>
@@ -20,29 +26,37 @@ export const createRow = (item) => {
 </td>
 </tr>`;
 };
+
 export const viewImgNewWindow = () => {
-  /*
-TODO: implementate eventListener by delegate method
-  */
-  const button = document.querySelectorAll(".table__btn_pic");
-  button.forEach((el) => {
-    el.addEventListener("click", () => {
-      const offsetTop = (screen.height - 800) / 2;
-      const offsetLeft = (screen.width - 600) / 2;
-      const win = open(
-        el.dataset.pic,
-        "picture",
-        `width=600,height=800,top=${offsetTop},left=${offsetLeft}`
-      );
-      const img = document.createElement("img");
-      img.src = el.dataset.pic;
-      img.width = "600";
-      img.height = "800";
-      img.alt = "рисунок товара";
-      win.document.body.append(img);
-    });
+  const tbody = document.querySelector(".table__body");
+  tbody.addEventListener("click", (e) => {
+
+    const target = e.target; //-> button view picture of current item
+
+    if (!target.classList.contains("table__btn_pic")) return;
+
+    const WIDTH_WINDOW = 600;
+    const HEIGHT_WINDOW = 800;
+
+    const offsetTop = (screen.height - HEIGHT_WINDOW) / 2;
+    const offsetLeft = (screen.width - WIDTH_WINDOW) / 2;
+
+    const win = open(
+      target.dataset.pic,
+      "picture",
+      `width=${WIDTH_WINDOW},height=${HEIGHT_WINDOW},top=${offsetTop},left=${offsetLeft}`
+    );
+
+    const img = document.createElement("img");
+    img.src = target.dataset.pic;
+    img.width = WIDTH_WINDOW;
+    img.height = HEIGHT_WINDOW;
+    img.alt = "рисунок товара";
+
+    win.document.body.append(img);
   });
 };
+
 export const addItemToTable = (f) => {
   f.addEventListener("submit", (e) => {
     e.preventDefault();
