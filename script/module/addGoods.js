@@ -38,8 +38,8 @@ export const viewImgNewWindow = () => {
     const WIDTH_WINDOW = 600;
     const HEIGHT_WINDOW = 800;
 
-    const offsetTop = (screen.height - HEIGHT_WINDOW) / 2;
-    const offsetLeft = (screen.width - WIDTH_WINDOW) / 2;
+    const offsetTop = (screen.height - HEIGHT_WINDOW) / 2; // -> центрирование окна по вертикали
+    const offsetLeft = (screen.width - WIDTH_WINDOW) / 2; // -> центрирование окна по горизонтали
 
     const win = open(
       target.dataset.pic,

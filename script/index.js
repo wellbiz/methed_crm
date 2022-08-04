@@ -12,6 +12,7 @@ import {
   openModalWindow,
 } from "./module/renderingTable.js";
 import { removeChoisedTr } from "./module/removeGoods.js";
+import { createPreview, previewImg } from "./module/previewImg.js";
 
 const init = () => {
   const form = document.querySelector(".modal__form");
@@ -22,5 +23,7 @@ const init = () => {
   removeChoisedTr();
   editDiscount();
   addItemToTable(form);
+  createPreview();
+  previewImg();
 };
 init();
