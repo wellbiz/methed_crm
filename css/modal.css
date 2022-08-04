@@ -63,7 +63,7 @@
     "category description"
     "units count"
     "discount price"
-    ". file"
+    "alert file"
     "file-add file-add";
   gap: 12px 24px;
   background: #FFFFFF;
@@ -103,7 +103,9 @@
 .modal__label_category {
   grid-area: category;
 }
-
+.modal__label_alert {
+  grid-area: alert;
+}
 .modal__label_description {
   grid-area: description;
 }
