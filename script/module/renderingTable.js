@@ -28,6 +28,7 @@ export const closeModalWindow = () => {
 const removeActiveOverlay = () => {
   document.querySelector(".preview").remove();
   document.querySelector(".overlay").classList.remove("active");
+  document.querySelector(".modal_alert_text").textContent = '';
 };
 
 export const openModalWindow = () => {
