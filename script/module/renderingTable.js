@@ -1,5 +1,6 @@
 import { createRow } from "./addGoods.js";
 import { goods } from "./goods.js";
+import { createPreview, } from "./previewImg.js";
 export const renderGoods = (goods) => {
   const tbody = document.querySelector(".table__body");
   goods.forEach((el) => {
@@ -25,6 +26,7 @@ export const closeModalWindow = () => {
 };
 
 const removeActiveOverlay = () => {
+  document.querySelector(".preview").remove();
   document.querySelector(".overlay").classList.remove("active");
 };
 
@@ -34,5 +36,7 @@ export const openModalWindow = () => {
     document.querySelector(".overlay").classList.add("active");
     setVendorCodeId(goods);
     document.querySelector(".modal__form").reset();
+    createPreview();
+
   });
 };
